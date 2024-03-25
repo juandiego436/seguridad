@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>pe.gob.muniveintiseisdeoctubre</groupId>
+    <artifactId>servicios</artifactId>
+    <version>1.0.0</version>
+    <name>servicios-mi-peru</name>
+    <description>Servicios para el proyecto seguridad ciudadana miPeru</description>
+
+    <properties>
+        <java.version>11</java.version>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+
+        <env>default</env>
+
+        <datasource.url>jdbc:mysql://127.0.0.1:3306/miperu</datasource.url>
+        <datasource.username>Admin</datasource.username>
+        <datasource.password>Lgoptimusg3</datasource.password>
+
+        <swagger.enabled>true</swagger.enabled>
+        <serviceAccountPath>C:/Users/rodri/Downloads/seguridadapp-8ac1b-firebase-adminsdk-lm9ce-0e6df71fed.json</serviceAccountPath>
+
+        <uploadPath>C:/seguridadApp/uploads/</uploadPath>
+        <uploadReportPath>C:/seguridadApp/uploads/report/</uploadReportPath>
+        <uploadAdvertisementPath>C:/seguridadApp/uploads/advertisement/</uploadAdvertisementPath>
+
+        <baseUrl>http://localhost:8080</baseUrl>
+        <uploadReportUrl>storage/uploads/report/</uploadReportUrl>
+        <uploadAdvertisementUrl>storage/uploads/advertisement/</uploadAdvertisementUrl>
+        <categoryUrl>storage/static/images/category/</categoryUrl>
+        <mailUrl>storage/static/images/mail/</mailUrl>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>env</name>
+                    <value>prod</value>
+                </property>
+            </activation>
+            <properties>
+                <baseUrl>https://munipiura.seguridadapp.pe</baseUrl>
+                <datasource.url>jdbc:mysql://35.237.200.9:3306/piura</datasource.url>
+                <datasource.username>root</datasource.username>
+                <datasource.password>Piura2023$$$</datasource.password>
+
+                <swagger.enabled>false</swagger.enabled>
+                <serviceAccountPath>/opt/firebaseKeys/piura-firebase.json</serviceAccountPath>
+
+                <uploadPath>/opt/seguridadApp/piura/uploads/</uploadPath>
+                <uploadReportPath>/opt/seguridadApp/piura/uploads/report/</uploadReportPath>
+                <uploadAdvertisementPath>/opt/seguridadApp/piura/uploads/advertisement/</uploadAdvertisementPath>
+                <categoryUrl>storage/static/images/category/</categoryUrl>
+                <mailUrl>storage/static/images/mail/</mailUrl>
+
+                <env>prod</env>
+            </properties>
+        </profile>
+    </profiles>
+
+    <repositories>
+        <repository>
+            <id>locationtech-releases</id>
+            <url>https://repo.locationtech.org/content/groups/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>jts-snapshots</id>
+            <url>https://repo.locationtech.org/content/repositories/jts-snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Libraries extra -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-admin</artifactId>
+            <version>8.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-webmvc-core</artifactId>
+            <version>1.6.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-security</artifactId>
+            <version>1.6.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.locationtech.jts</groupId>
+            <artifactId>jts-core</artifactId>
+            <version>1.18.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.locationtech.spatial4j</groupId>
+            <artifactId>spatial4j</artifactId>
+            <version>0.8</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+        <finalName>seguridadService-latest</finalName>
+    </build>
+
+</project>
